@@ -24,6 +24,9 @@ include '../listlink.php';
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+<?php
+include '../preloader.php';
+?>
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b5ab70;">
     <!-- Left navbar links -->
@@ -85,7 +88,7 @@ include '../listlink.php';
               <!-- /.card-header -->
               <div class="card-body">
               <form action="prosestambah.php" method="post">
-                                        <a href="../backoffice_data_pendaftaran" class="btn btn-secondary btn-sm"><i class="nav-icon fas fa-chevron-left"></i> Kembali</a>
+                                        <a href="../backoffice_kelas" class="btn btn-secondary btn-sm"><i class="nav-icon fas fa-chevron-left"></i> Kembali</a>
                                         <br>
                                         <br>
                                         <div class="form-group">

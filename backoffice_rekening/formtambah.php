@@ -26,6 +26,9 @@ require_once '../database/config.php';
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
+    <?php
+include '../preloader.php';
+?>
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b5ab70;">
             <!-- Left navbar links -->

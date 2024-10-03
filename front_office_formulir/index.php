@@ -19,6 +19,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
+<?php
+include '../preloader.php';
+?>
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background-color: #b5ab70;">

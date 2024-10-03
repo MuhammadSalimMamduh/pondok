@@ -26,6 +26,9 @@ require_once '../database/config.php';
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
+  <?php
+include '../preloader.php';
+?>
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b5ab70;">
       <!-- Left navbar links -->
@@ -93,7 +96,6 @@ require_once '../database/config.php';
 
                   <a href="formtambah.php" class="btn btn-sm btn-secondary"><i class="nav-icon fas fa-download"></i>Tambah Data</a>
                   <a href="exportexcel.php" class="btn btn-success btn-sm" target="_blank"><i class="nav-icon fas fa-file"></i> Ekspor Data</a>
-                  <a href="terimasantri.php" class="btn btn-success btn-sm" target="_blank"><i class="nav-icon fas fa-file"></i> Terima Semua Santri</a>
                   <br>
                   <br>
                   <table id="example1" class="table table-bordered table-striped table-sm">
@@ -174,7 +176,7 @@ require_once '../database/config.php';
                                 <button type="button" class="btn btn-sm btn-primary"
                                   data-toggle="modal"
                                   data-target="#modal-edit"
-                                  data-nis="<?= $dt_pendaftaran['nis']; ?>"
+                     
                                   data-nik="<?= $dt_pendaftaran['nik']; ?>"
                                   data-nama_lengkap="<?= $dt_pendaftaran['nama_lengkap']; ?>"
 
@@ -182,12 +184,12 @@ require_once '../database/config.php';
                                   data-tgllahir="<?= $dt_pendaftaran['tgl_lahir']; ?>"
                                   data-alamat="<?= $dt_pendaftaran['alamat']; ?>"
                                   data-asalsekolah="<?= $dt_pendaftaran['asal_sekolah']; ?>"
-                                  data-ortu="<?= $dt_pendaftaran['ayah']; ?>"
-                                  data-ortu="<?= $dt_pendaftaran['ibu']; ?>"
+                                  data-ayah="<?= $dt_pendaftaran['ayah']; ?>"
+                                  data-ibu="<?= $dt_pendaftaran['ibu']; ?>"
                                   data-wali="<?= $dt_pendaftaran['wali']; ?>"
                                   data-kontak="<?= $dt_pendaftaran['no_orangtua']; ?>"
                                   data-tgldaftar="<?= $dt_pendaftaran['tgl_daftar']; ?>"
-                                  data-riwayat-penyakit="<?= $dt_pendaftaran['riwayat_penyakit']; ?>">
+                                  data-riwayatpenyakit="<?= $dt_pendaftaran['riwayat_penyakit']; ?>">
                                   <i class="nav-icon fas fa-edit"></i>
                                 </button>
                                 <a href="detailpendaftaran.php?nik=<?=$dt_pendaftaran['nik'];?>" class="btn btn-sm btn-info"><i class="nav-icon fas fa-receipt"></i></a>
@@ -233,19 +235,12 @@ require_once '../database/config.php';
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form class="form-horizontal" action="edit.php" method="POST" id="edit">
+          <form class="form-horizontal" action="prosesedit.php" method="POST" id="edit">
             <div class="modal-body">
               <table>
                 <thead>
                 <tbody>
-                  <tr>
-                    <td width="30%">NIS</td>
-                    <td width="5%">:</td>
-                    <td>
-                      <input type="text" name="ed_nisuserterpilih" class="form-control" hidden>
-                      <input type="text" name="ed_nisuserterpilih2" class="form-control" disabled>
-                    </td>
-                  </tr>
+                 
                   <tr>
                   <tr>
                     <td width="30%">NIK</td>
@@ -291,10 +286,17 @@ require_once '../database/config.php';
                     </td>
                   </tr>
                   <tr>
-                    <td width="30%">Nama Orang Tua</td>
+                    <td width="30%">Nama Ayah</td>
                     <td width="5%">:</td>
                     <td>
-                      <input type="text" name="ed_ortuterpilih" class="form-control">
+                      <input type="text" name="ed_ayahterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Nama Ibu</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_ibuterpilih" class="form-control">
                     </td>
                   </tr>
                   <tr>
@@ -458,30 +460,30 @@ $('#modal-default').on('show.bs.modal', function(e){
   <script type="text/javascript">
     $('#modal-edit').on('show.bs.modal', function(e) {
 
-      var nis = $(e.relatedTarget).data('nis');
+
       var nik = $(e.relatedTarget).data('nik');
       var namalengkap = $(e.relatedTarget).data('nama_lengkap');
-
-      var tmplahir = $(e.relatedTarget).data('tempat_lahir');
-      var tgllahir = $(e.relatedTarget).data('tgl_lahir');
+      var tmplahir = $(e.relatedTarget).data('tmplahir');
+      var tgllahir = $(e.relatedTarget).data('tgllahir');
       var alamat = $(e.relatedTarget).data('alamat');
-      var asalsekolah = $(e.relatedTarget).data('asal_sekolah');
-      var ortu = $(e.relatedTarget).data('ortu');
+      var asalsekolah = $(e.relatedTarget).data('asalsekolah');
+      var ayah = $(e.relatedTarget).data('ayah');
+      var ibu = $(e.relatedTarget).data('ibu');
       var wali = $(e.relatedTarget).data('wali');
-      var kontak = $(e.relatedTarget).data('no_orangtua');
+      var kontak = $(e.relatedTarget).data('kontak');
+      var tgldaftar = $(e.relatedTarget).data('tgl_daftar');
+      var riwayatpenyakit = $(e.relatedTarget).data('riwayatpenyakit');
 
-      var riwayatpenyakit = $(e.relatedTarget).data('riwayat_penyakit');
-
-      $(e.currentTarget).find('input[name="ed_nisuserterpilih"]').val(nis);
-      $(e.currentTarget).find('input[name="ed_nisuserterpilih2"]').val(nis);
+    
       $(e.currentTarget).find('input[name="ed_nikuserterpilih"]').val(nik);
       $(e.currentTarget).find('input[name="ed_nikuserterpilih2"]').val(nik);
       $(e.currentTarget).find('input[name="ed_namaterpilih"]').val(namalengkap);
       $(e.currentTarget).find('input[name="ed_tmplahirterpilih"]').val(tmplahir);
       $(e.currentTarget).find('input[name="ed_tgllahirterpilih"]').val(tgllahir);
-      $(e.currentTarget).find('input[name="ed_alamatlahirterpilih"]').val(alamat);
-      $(e.currentTarget).find('input[name="ed_sekolahlahirterpilih"]').val(asalsekolah);
-      $(e.currentTarget).find('input[name="ed_ortuterpilih"]').val(ortu);
+      $(e.currentTarget).find('input[name="ed_alamatterpilih"]').val(alamat);
+      $(e.currentTarget).find('input[name="ed_sekolahterpilih"]').val(asalsekolah);
+      $(e.currentTarget).find('input[name="ed_ayahterpilih"]').val(ayah);
+      $(e.currentTarget).find('input[name="ed_ibuterpilih"]').val(ibu);
       $(e.currentTarget).find('input[name="ed_waliterpilih"]').val(wali);
       $(e.currentTarget).find('input[name="ed_kontakterpilih"]').val(kontak);
       $(e.currentTarget).find('input[name="ed_penyakitterpilih"]').val(riwayatpenyakit);

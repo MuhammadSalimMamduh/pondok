@@ -8,13 +8,14 @@ $konstruktor = "dasbor";
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ribath Al Musyarraf</title>
+  <link rel="icon" href="../img/pondok.png">
 <?php 
 require_once '../database/config.php';
 include '../listlink.php';
 ?>
 </head>
 <!--
-`body` tag options:
+body tag options:
 
   Apply one or more of the following classes to to the body tag
   to get the desired effect
@@ -24,6 +25,9 @@ include '../listlink.php';
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+  <?php
+include '../preloader.php';
+?>
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b5ab70;">
     <!-- Left navbar links -->
@@ -77,7 +81,54 @@ include '../listlink.php';
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          Dashboard
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>150</h3>
+
+                <p>Pesanan Formulir</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>44</h3>
+
+                <p>Data Pendaftaran</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>65</h3>
+
+                <p>Data Santri</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+
           </div>
         <!-- /.row -->
       </div>

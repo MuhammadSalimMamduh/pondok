@@ -26,6 +26,9 @@ require_once '../database/config.php';
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
+    <?php
+include '../preloader.php';
+?>
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b5ab70;">
             <!-- Left navbar links -->
@@ -194,7 +197,7 @@ require_once '../database/config.php';
                                                        
                                                         <td>
                                                             <center>
-                                                            <button type="button" class="btn btn-sm btn-primary"
+                                                            <button type="button" class="btn btn-sm btn-info"
                                                                     data-toggle="modal"
                                                                     data-target="#modal-edit"
                                                                     >
@@ -204,15 +207,13 @@ require_once '../database/config.php';
                                                                 <button type="button" class="btn btn-sm btn-primary"
                                                                     data-toggle="modal"
                                                                     data-target="#modal-edit"
+                                                                    data-nama="<?=$dt_rekening['nama_kelas'];?>"
+                                                                    data-wali="<?=$dt_rekening['wali_kelas'];?>"
+                                                                    data-jurusan="<?=$dt_rekening['id_jurusan'];?>"
                                                                     >
                                                                     <i class="nav-icon fas fa-edit"></i>
                                                                 </button>
-                                                                <button type="button" class="btn btn-sm btn-danger"
-                                                                    data-toggle="modal"
-                                                                    data-target="#modal-edit"
-                                                                     >
-                                                                    <i class="nav-icon fas fa-times"></i>
-                                                                </button>
+                                                                
                                                             </center>
                                                         </td>
                                                     </tr>
@@ -279,24 +280,35 @@ require_once '../database/config.php';
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td width="30%">Nama pemilik</td>
+                                        <td width="30%">Nama Kelas</td>
                                         <td width="5%">:</td>
                                         <td>
                                             <input type="text" name="ed_namaterpilih" class="form-control">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td width="30%">No. Rekening</td>
+                                        <td width="30%">Wali Kelas</td>
                                         <td width="5%">:</td>
                                         <td>
-                                            <input type="text" name="ed_rekeningterpilih" class="form-control">
+                                            <input type="text" name="ed_waliterpilih" class="form-control">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td width="30%">Nama Bank</td>
+                                        <td width="30%">Kategori</td>
                                         <td width="5%">:</td>
                                         <td>
-                                            <input type="text" name="ed_bankterpilih" class="form-control">
+                                            <select name="ed_kategoriterpilih" id="ed_kategoriterpilih" class="form-control">
+                                                <option value="">--pilih Kategori--</option>
+                                                <?php
+                                                $qrambil = mysqli_query($koneksi,"SELECT * FROM tbl_jurusan") or die (mysqli_error($koneksi));
+                                                $tmpung = mysqli_fetch_assoc($qrambil);
+                                                $ktegori = $tmpung['nama_jurusan'];
+                                                $id = $tmpung['id_jurusan'];
+
+                                    
+
+                                                ?>
+                                            </select>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -313,6 +325,7 @@ require_once '../database/config.php';
             </div>
             <!-- /.modal-dialog -->
         </div>
+    
 
     </div>
     <?php
@@ -322,16 +335,15 @@ require_once '../database/config.php';
     <script type="text/javascript">
     $('#modal-edit').on('show.bs.modal', function(e) {
 
-      var id = $(e.relatedTarget).data('id');
-      var tujuan = $(e.relatedTarget).data('tujuan');
-      var rekening = $(e.relatedTarget).data('rekening');
       var nama = $(e.relatedTarget).data('nama');
+      var wali = $(e.relatedTarget).data('wali');
+      var jurusan = $(e.relatedTarget).data('jurusan');
       
 
-      $(e.currentTarget).find('input[name="ed_idterpilih"]').val(id);
-      $(e.currentTarget).find('input[name="ed_namaterpilih"]').val(tujuan);
-      $(e.currentTarget).find('input[name="ed_rekeningterpilih"]').val(rekening);
-      $(e.currentTarget).find('input[name="ed_bankterpilih"]').val(nama);
+
+      $(e.currentTarget).find('input[name="ed_namaterpilih"]').val(nama);
+      $(e.currentTarget).find('input[name="ed_waliterpilih"]').val(wali);
+      $(e.currentTarget).find('input[name="ed_kategoriterpilih"]').val(jurusan);
      
 
     });

@@ -26,6 +26,9 @@ $konstruktor = "santri";
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
+  <?php
+include '../preloader.php';
+?>
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b5ab70;">
       <!-- Left navbar links -->
@@ -83,19 +86,7 @@ $konstruktor = "santri";
                   <h3 class="card-title"><i class="nav-icon fas fa-users"></i> Data Santri</h3>
                 </div>
                 <div class="card-body">
-                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-import"><i class="nav-icon fas fa-file-excel"></i> Import Data</button>
-                <br>
-                <br>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="card card-primary">
-                      <div class="card-header" style="background-color: #490206;">
-                      <div class="card-title">
-                      <center>DATA SANTRI PUTRA</center>
-                      </div>
-                      </div>
-                      <div class="card-body">
-                      <table id="example1" class="table table-bordered table-striped table-sm">
+                <table id="example1" class="table table-bordered table-striped table-sm">
                     <thead>
                       <tr>
                         <th width="5%">No</th>
@@ -166,7 +157,28 @@ $konstruktor = "santri";
                             <td><?= $dt_santri['tgl_daftar']; ?></td>
 
                             <td>
-                             aksi
+                            <button type="button" class="btn btn-sm btn-primary"
+                                  data-toggle="modal"
+                                  data-target="#modal-edit"
+                                  data-nis="<?= $dt_santri['nis']; ?>"
+                                  data-nik="<?= $dt_santri['nik']; ?>"
+                                  data-nama_lengkap="<?= $dt_santri['nama_santri']; ?>"
+
+                                  data-tmplahir="<?= $dt_santri['tempat_lahir']; ?>"
+                                  data-tgllahir="<?= $dt_santri['tanggal_lahir']; ?>"
+                                  data-alamat="<?= $dt_santri['alamat']; ?>"
+                                  data-asalsekolah="<?= $dt_santri['asal_sekolah']; ?>"
+                                  data-ayah="<?= $dt_santri['nama_ayah']; ?>"
+                                  data-ibu="<?= $dt_santri['nama_ibu']; ?>"
+                                  data-wali="<?= $dt_santri['wali']; ?>"
+                                  data-kontak="<?= $dt_santri['kontak']; ?>"
+                                  data-tgldaftar="<?= $dt_santri['tgl_daftar']; ?>"
+                                  data-riwayatpenyakit="<?= $dt_santri['riwayat_penyakit']; ?>">
+                                  <i class="nav-icon fas fa-edit"></i>
+                                </button>
+                            <a href="detailsantri.php?nik=<?=$dt_santri['nik'];?>" class="btn btn-sm btn-info"><i class="nav-icon fas fa-receipt"></i></a>
+                            <a href="proseshapus.php?nik=<?= $dt_santri['nik']; ?>&hapus=hapus" class="btn btn-sm btn-danger" onclick="return confirm('Anda akan menghapus data NIK [<?= $dt_santri['nik']; ?>] - Nama Santri : [<?= $dt_santri['nama_santri']; ?>]')"><i class="nav-icon fas fa-trash"></i></a>
+
                             </td>
                           </tr>
                       <?php
@@ -175,18 +187,6 @@ $konstruktor = "santri";
                       ?>
                   </table>
 
-                      </div>
-
-                      </div>
-                      
-                         
-                   
-                     
-                  
-                    </div>
-                   
-
-                  </div>
                 </div>
               </div>
             </div>
@@ -208,6 +208,125 @@ $konstruktor = "santri";
     include '../footer.php';
     ?>
   </div>
+
+  <div class="modal fade" id="modal-edit">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #b5ab70">
+            <h4 class="modal-title">
+              <font color="#ffffff">Edit</font>
+            </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form class="form-horizontal" action="prosesedit.php" method="POST" id="edit">
+            <div class="modal-body">
+              <table>
+                <thead>
+                <tbody>
+                  <tr>
+                    <td width="30%">NIS</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_nisuserterpilih" class="form-control" hidden>
+                      <input type="text" name="ed_nisuserterpilih2" class="form-control" disabled>
+                    </td>
+                  </tr>
+                  <tr>
+                  <tr>
+                    <td width="30%">NIK</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_nikuserterpilih" class="form-control" hidden>
+                      <input type="text" name="ed_nikuserterpilih2" class="form-control" disabled>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Nama Lengkap Santri</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_namaterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Tempat Lahir</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_tmplahirterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Tgl Lahir</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="date" name="ed_tgllahirterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Alamat Lengkap</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_alamatterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Asal Sekolah</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_sekolahterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Nama Ayah</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_ayahterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Nama Ibu</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_ibuterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Nama Wali</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_waliterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">kontak</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_kontakterpilih" class="form-control">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="30%">Riwayat Penyakit</td>
+                    <td width="5%">:</td>
+                    <td>
+                      <input type="text" name="ed_penyakitterpilih" class="form-control">
+                    </td>
+                  </tr>
+                </tbody>
+                </thead>
+              </table>
+
+            </div>
+            <div class="modal-footer pull-right">
+              <button type="submit" name="edit" class="btn btn-secondary"> <i class="nav-icon fas fa-edit"></i>Ya, Edit Data</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
   <!-- modal import -->
       <div class="modal fade" id="modal-import">
@@ -241,6 +360,39 @@ $konstruktor = "santri";
   <?php
   include '../script.php';
   ?>
+  <script type="text/javascript">
+    $('#modal-edit').on('show.bs.modal', function(e) {
+
+      var nis = $(e.relatedTarget).data('nis');
+      var nik = $(e.relatedTarget).data('nik');
+      var namalengkap = $(e.relatedTarget).data('nama_lengkap');
+      var tmplahir = $(e.relatedTarget).data('tmplahir');
+      var tgllahir = $(e.relatedTarget).data('tgllahir');
+      var alamat = $(e.relatedTarget).data('alamat');
+      var asalsekolah = $(e.relatedTarget).data('asalsekolah');
+      var ayah = $(e.relatedTarget).data('ayah');
+      var ibu = $(e.relatedTarget).data('ibu');
+      var wali = $(e.relatedTarget).data('wali');
+      var kontak = $(e.relatedTarget).data('kontak');
+      var tgldaftar = $(e.relatedTarget).data('tgl_daftar');
+      var riwayatpenyakit = $(e.relatedTarget).data('riwayatpenyakit');
+
+      $(e.currentTarget).find('input[name="ed_nisuserterpilih"]').val(nis);
+      $(e.currentTarget).find('input[name="ed_nisuserterpilih2"]').val(nis);
+      $(e.currentTarget).find('input[name="ed_nikuserterpilih"]').val(nik);
+      $(e.currentTarget).find('input[name="ed_nikuserterpilih2"]').val(nik);
+      $(e.currentTarget).find('input[name="ed_namaterpilih"]').val(namalengkap);
+      $(e.currentTarget).find('input[name="ed_tmplahirterpilih"]').val(tmplahir);
+      $(e.currentTarget).find('input[name="ed_tgllahirterpilih"]').val(tgllahir);
+      $(e.currentTarget).find('input[name="ed_alamatterpilih"]').val(alamat);
+      $(e.currentTarget).find('input[name="ed_sekolahterpilih"]').val(asalsekolah);
+      $(e.currentTarget).find('input[name="ed_ayahterpilih"]').val(ayah);
+      $(e.currentTarget).find('input[name="ed_ibuterpilih"]').val(ibu);
+      $(e.currentTarget).find('input[name="ed_waliterpilih"]').val(wali);
+      $(e.currentTarget).find('input[name="ed_kontakterpilih"]').val(kontak);
+      $(e.currentTarget).find('input[name="ed_penyakitterpilih"]').val(riwayatpenyakit);
+    });
+  </script>
 </body>
 
 </html>

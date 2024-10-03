@@ -35,16 +35,19 @@ if (isset($_POST['uploadakte'])) {
 
     $qrtambah = mysqli_query($koneksi, "INSERT INTO tbl_berkas VALUES (null, null, '$file_upload', null, null,'$id', '$nama')") or die(mysqli_error($koneksi));
 
-
+   
     ?>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
+     <?php
+      }
+     echo'
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>;
     <script>
         swal("Berhasil", "Berkas dengan NIK : <?=$id;?> berhasil ditambahkan", "success");
-        setTimeout(function(){window.location.href = "../backoffice_data_office/berkas.php";}, 1500);
-    </script>
-    <?php
+        setTimeout(function(){window.location.href = "../backoffice_data_berkas/formedit.php?nik='.$id.'";}, 1500);
+    </script>';
+ 
 
-    }
+   
 }
 
 ?>  

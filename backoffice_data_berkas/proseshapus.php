@@ -12,7 +12,8 @@
     $nik = @$_GET['berkas'];
 
     $queryhapusmhs = mysqli_query($koneksi, "DELETE FROM tbl_berkas WHERE nik='$nik'") or die(mysqli_error($koneksi));
-    
+    $queryhapusmhs = mysqli_query($koneksi, "DELETE FROM tbl_santri WHERE nik='$nik'") or die(mysqli_error($koneksi));
+
     
     ?>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';

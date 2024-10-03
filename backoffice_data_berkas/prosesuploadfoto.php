@@ -37,16 +37,19 @@ if (isset($_POST['uploadfoto'])) {
 
 
     ?>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
+     <?php
+      }
+     echo'
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>;
     <script>
-        swal("Berhasil", "Data Santri dengan NISN : <?=$nisn;?> berhasil ditambahkan", "success");
-        setTimeout(function(){window.location.href = "../backoffice_data_berkas/berkas.php";}, 1500);
-    </script>
-    <?php
+        swal("Berhasil", "Berkas dengan NIK : <?=$id;?> berhasil ditambahkan", "success");
+        setTimeout(function(){window.location.href = "../backoffice_data_berkas/formedit.php?nik='.$id.'";}, 1500);
+    </script>';
+ 
 
-    }
+   
 }
 
-?>  
+?>   
 </body>
 </html>

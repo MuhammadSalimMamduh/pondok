@@ -64,6 +64,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="../backoffice_tahun_ajaran" class="nav-link <?php if (@$konstruktor=='tahun_ajaran') {echo 'active';}?>">
+              <i class="nav-icon fas fa-globe"></i>
+              <p>
+               Tahun Ajaran
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="../backoffice_kelas" class="nav-link <?php if (@$konstruktor=='kelas') {echo 'active';}?>">
               <i class="nav-icon fas fa-folder"></i>
               <p>
@@ -154,4 +162,3 @@
               </p>
             </a>
           </li>
-         

@@ -106,19 +106,19 @@ include '../preloader.php';
               <br>
               <?php
                     $nik = @$_GET['nik'];
-                    $qrambil = mysqli_query($koneksi, "SELECT * FROM tbl_pendaftaran WHERE nik='$nik'") or die (mysqli_error($koneksi));
+                    $qrambil = mysqli_query($koneksi, "SELECT * FROM tbl_santri WHERE nik='$nik'") or die (mysqli_error($koneksi));
                     $arrambil = mysqli_fetch_assoc($qrambil);
                     $nis = $arrambil['nis'];
                     $nik = $arrambil['nik'];
-                    $nama_lengkap = $arrambil['nama_lengkap'];
+                    $nama_lengkap = $arrambil['nama_santri'];
                     $tmp_lahir = $arrambil['tempat_lahir'];
-                    $tgl_lahir = $arrambil['tgl_lahir'];
+                    $tgl_lahir = $arrambil['tanggal_lahir'];
                     $alamat = $arrambil['alamat'];
                     $asal_sekolah = $arrambil['asal_sekolah'];
-                    $ayah = $arrambil['ayah'];
-                    $ibu = $arrambil['ibu'];
+                    $ayah = $arrambil['nama_ayah'];
+                    $ibu = $arrambil['nama_ibu'];
                     $nama_wali = $arrambil['wali'];
-                    $kontak = $arrambil['no_orangtua'];
+                    $kontak = $arrambil['kontak'];
                     $tgl_daftar = $arrambil['tgl_daftar'];
                     $penyakit = $arrambil['riwayat_penyakit'];
                     $kelamin = $arrambil['kelamin'];
@@ -135,7 +135,7 @@ include '../preloader.php';
                     <tr>
                         <td width="35%">No Induk Santri</td>
                         <td width="2%">:</td>
-                        <td><?=$nis;?></td>
+                        <td><b><?=$nis;?></b></td>
                     </tr>
                     <tr>
                         <td width="35%">NIK</td>
@@ -242,152 +242,9 @@ include '../preloader.php';
 <?php
 include '../footer.php';
 ?>
-<div class="modal fade" id="modal-edit">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: #b5ab70">
-              <h4 class="modal-title"><font color="#ffffff">Edit</font></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form class="form-horizontal" action="edit.php" method="POST" id="edit">
-            <div class="modal-body">
-              <table>
-                <thead>
-                  <tbody>
-                    <tr>
-                      <td width="30%">NIK</td>
-                      <td width="5%">:</td>
-                      <td>
-                        <input type="text" name="ed_nikuserterpilih" class="form-control" hidden>
-                        <input type="text" name="ed_nikuserterpilih2" class="form-control" disabled></td>
-                    </tr>
-                    <tr>
-                      <td width="30%">Username</td>
-                      <td width="5%">:</td>
-                      <td>
-                        <input type="text" name="ed_userterpilih" class="form-control" disabled></td>
-                    </tr>
-                    <tr>
-                      <td width="30%">Nama Pengguna</td>
-                      <td width="5%">:</td>
-                      <td>
-                        <input type="text" name="ed_namaterpilih" class="form-control" ></td>
-                    </tr>
-                  </tbody>
-                </thead>
-              </table>
-                   
-            </div>
-            <div class="modal-footer pull-right">
-              <button type="submit" name="edit" class="btn btn-secondary"> <i class="nav-icon fas fa-edit"></i>Ya, Edit Data</button>
-            </div>
-            </form>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
 
-<div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: #b5ab70">
-              <h4 class="modal-title"><font color="#ffffff">Hapus Data</font></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form class="form-horizontal" action="hapus.php" method="POST" id="hapusdata">
-            <div class="modal-body">
-              <table>
-                <thead>
-                  <tbody>
-                    <tr>
-                      <td width="30%">NIK</td>
-                      <td width="5%">:</td>
-                      <td>
-                        <input type="text" name="nikuserterpilih" class="form-control" hidden>
-                        <input type="text" name="nikuserterpilih2" class="form-control" disabled></td>
-                    </tr>
-                    <tr>
-                      <td width="30%">Nama Pengguna</td>
-                      <td width="5%">:</td>
-                      <td>
-                        <input type="text" name="namaterpilih" class="form-control" disabled></td>
-                    </tr>
-                    <tr>
-                      <td width="30%">Username</td>
-                      <td width="5%">:</td>
-                      <td>
-                        <input type="text" name="userterpilih" class="form-control" disabled></td>
-                    </tr>
-                  </tbody>
-                </thead>
-              </table>
-                   
-            </div>
-            <div class="modal-footer pull-right">
-              <button type="submit" name="hapus" class="btn btn-secondary">Ya, Hapus Data</button>
-            </div>
-            </form>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
 
-      <div class="modal fade" id="modal-tambahdata">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: #b5ab70">
-              <h4 class="modal-title"><font color="#ffffff">Tambah Data</font></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form class="form-horizontal" action="tambahdata.php" method="POST" id="tambahdata">
-            <div class="modal-body">
-            <div class="card-body">
-                  <div class="form-group">
-                    <label for="nik">NIK</label>
-                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Input NIK">
-                  </div>
-                  <div class="form-group">
-                    <label for="nama">Nama Pengguna</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama Pengguna">
-                  </div>
-                  <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Input Username">
-                  </div>
-                  <div class="form-grup">
-                    <label for="agama">Agama</label>
-                  <select class="form-control" id="agama" name="agama">
-                    <option value="">-- Pilih Agama --</option>
-                  <?php
-                  $panggilagama = mysqli_query($koneksi, "SELECT * FROM tbl_agama") or die (mysqli_error($koneksi));
-                  while($dt_agama=mysqli_fetch_array($panggilagama)){
-                    echo " <option value='$dt_agama[id]'>$dt_agama[agama]</option>";
-                  }
-                  ?>
-                  </select>
-                  </div>
-            </div>
-            <div class="modal-footer pull-right">
-              <button type="submit" name="tambahdata" class="btn btn-secondary"> <i class="nav-icon fas fa-download"></i>Tambah Data</button>
-            </div>
-            </form>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-      
+
 </div>
 <?php
 include '../script.php';

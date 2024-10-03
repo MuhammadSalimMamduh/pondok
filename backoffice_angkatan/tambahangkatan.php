@@ -26,6 +26,9 @@ require_once '../database/config.php';
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
+    <?php
+include '../preloader.php';
+?>
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b5ab70;">
             <!-- Left navbar links -->
@@ -92,7 +95,7 @@ require_once '../database/config.php';
                                 <form action="proses.php" method="post">
 
                                 <div class="card-body">
-                                <a href="../admin_master_angkatan" class="btn btn-secondary btn-sm"><i class="nav-icon fas fa-chevron-left"></i> Kembali</a>
+                                <a href="../backoffice_angkatan" class="btn btn-secondary btn-sm"><i class="nav-icon fas fa-chevron-left"></i> Kembali</a>
                   <div class="form-group">
                     <label for="kodeangkatan">Kode angkatan</label>
                     <input type="text" class="form-control" id="kodeangkatan" name="kodeangkatan" id="angkatan" maxlength="4" required>

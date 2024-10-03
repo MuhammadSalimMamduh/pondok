@@ -24,6 +24,9 @@ include '../listlink.php';
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+<?php
+include '../preloader.php';
+?>
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #b5ab70;">
     <!-- Left navbar links -->
@@ -78,7 +81,7 @@ include '../listlink.php';
       <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-        <div class="card">
+            <div class="card">
               <div class="card-header" style="background-color: #490206;">
                 <h3 class="card-title"><font color="#ffffff"><i class="nav-icon fas fa-book"></i> &nbsp Berkas</font></h3>
               </div>
@@ -911,10 +914,10 @@ $('#modal-edit').on('show.bs.modal', function(e){
       var bukti = $(e.relatedTarget).data('bukti');
       var nik = $(e.relatedTarget).data('nik');
    
-      var path = "../img/bukti_du/"+bukti;
+      
 
       $(e.currentTarget).find('input[name="nik"]').val(nik);
-      document.getElementById('fotobukti').src= path;
+      document.getElementById('fotobukti').src= bukti;
     });
   </script>
 

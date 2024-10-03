@@ -58,7 +58,7 @@ function Footer()
     $tgl_daftar = $arrambil['tgl_daftar'];
     $penyakit = $arrambil['riwayat_penyakit'];
     $kelamin = $arrambil['kelamin'];
-    $jurusan = $arrambil['id_jurusan'];
+    $jurusan = $arrambil['jurusan'];
 
     $sqljurusan = mysqli_query($koneksi,"SELECT nama_jurusan FROM tbl_jurusan WHERE id_jurusan='$jurusan'") or die (mysqli_error($koneksi));
     $dt_jurusan = mysqli_fetch_assoc($sqljurusan);
